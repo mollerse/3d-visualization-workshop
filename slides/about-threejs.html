@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>three.js</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'}
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-slide-content { padding: 0.5rem 4rem; }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-slide-content * { font-size: 16px; }
+      .remark-code * { font-size: 20px; }
+      .remark-slide-content img { width: 50%; margin: 1rem 0;}
+
+      .remark-slide-content { text-align: center }
+
+      .topLeft { left: 1rem; top: 8rem }
+      .topRight { right: 1rem; top: 8rem }
+      .bottomLeft { left: 1rem; bottom: 1rem }
+      .bottomRight { right: 1rem; bottom: 1rem }
+
+      .left { left: 1rem; top: 16rem }
+      .center { right: 38%; top: 16rem }
+      .right { right: 1rem; top: 16rem }
+
+      .lowerleft { left: 1rem; top: 20rem }
+      .lowercenter { right: 38%; top: 20rem }
+      .lowerright { right: 1rem; top: 20rem }
+
+      .topLeft img,
+      .topRight img,
+      .bottomLeft img,
+      .bottomRight img { width: 97.5% !important; margin: 0.1rem !important; }
+
+      .left7525 { left: 0rem; top: 20rem; position: fixed; width: 72% }
+      .right7525 { right: 1rem; top: 13rem; position: fixed; width: 25% }
+      .left7525 img { width: 85% !important; margin: 0.1rem !important; }
+      .right7525 img { width: 85% !important; margin: 0.1rem !important; }
+
+      .topLeft,
+      .topRight,
+      .bottomLeft,
+      .bottomRight { position: fixed; width: 40%;}
+
+      .left,
+      .center,
+      .right,
+      .lowerleft,
+      .lowercenter,
+      .lowerright { position: fixed; width: 28%;}
+
+      .left img,
+      .center img,
+      .right img,
+      .lowerleft img,
+      .lowercenter img,
+      .lowerright img { width: 97.5% !important; margin: 0.1rem !important; }
+
+      .full * { width: 94% !important;}
+
+      .verticalCenter {
+        padding-top: 27%;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 20%;
+        height: 92%;
+        float: left;
+        text-align: left;
+      }
+
+      .left-column h1:last-of-type, .left-column h2:last-of-type, .left-column h3:last-child {
+        color: #000;
+      }
+
+      .right-column {
+        width: 75%;
+        float: right;
+        padding-top: 1em;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+three.js
+================
+
+_A framework for making WebGL-things._
+
+---
+.left-column[
+  # three.js
+]
+.right-column[
+  ## WebGL is very low level
+
+  To make a [spinning cube](https://mdn.github.io/webgl-examples/tutorial/sample5/) you'll need a lot of [code](https://github.com/mdn/webgl-examples/blob/gh-pages/tutorial/sample5/webgl-demo.js)
+]
+
+---
+.left-column[
+  # three.js
+]
+.right-column[
+  ## WebGL is very low level
+
+  To make a [spinning cube](https://mdn.github.io/webgl-examples/tutorial/sample5/) you'll need a lot of [code](https://github.com/mdn/webgl-examples/blob/gh-pages/tutorial/sample5/webgl-demo.js)
+]
+.right-column[
+  ## three.js comes with abstractions 👌
+
+  Gives us a vocabulary closer to the way we actually talk about 3D.
+]
+
+---
+.left-column[
+  # three.js
+  # Core
+]
+.right-column[
+  ## Core components
+  - Renderer
+  - Scene
+  - Camera
+]
+
+---
+.left-column[
+  # three.js
+  # Core
+]
+.right-column[
+  ## Renderer
+  Three.js comes with different ways to render. The one we care about right now is the WebGL renderer.
+]
+
+---
+.left-column[
+  # three.js
+  # Core
+]
+.right-column[
+  ## Renderer
+  Three.js comes with different ways to render. The one we care about right now is the WebGL renderer.
+]
+.right-column[
+  ```js
+renderer = new THREE.WebGLRenderer();
+renderer.setSize(HEIGHT,WIDTH);
+  ```
+]
+
+---
+.left-column[
+  # three.js
+  # Core
+]
+.right-column[
+  ## Renderer
+  Three.js comes with different ways to render. The one we care about right now is the WebGL renderer.
+]
+.right-column[
+  ```js
+renderer = new THREE.WebGLRenderer();
+renderer.setSize(HEIGHT,WIDTH);
+  ```
+]
+.right-column[
+  Three.js can also render to Canvas and SVG. Used to have a CSS-renderer, but it has been discontinued.
+]
+---
+.left-column[
+  # three.js
+  # Core
+]
+.right-column[
+  ## Scene
+  For a renderer to have something to draw, it needs a scene.
+]
+---
+.left-column[
+  # three.js
+  # Core
+]
+.right-column[
+  ## Scene
+  For a renderer to have something to draw, it needs a scene.
+]
+.right-column[
+  ```js
+scene = new THREE.Scene();
+// ...
+scene.add(someObject);
+  ```
+]
+---
+.left-column[
+  # three.js
+  # Core
+]
+.right-column[
+  ## Scene
+  For a renderer to have something to draw, it needs a scene.
+]
+.right-column[
+  ```js
+scene = new THREE.Scene();
+// ...
+scene.add(teapot);
+  ```
+]
+.right-column[
+  ![altxt](./img/scene-graph.png)
+]
+
+---
+.left-column[
+  # three.js
+  # Core
+]
+.right-column[
+  ## Camera
+  To complete the 3D-experience, the renderer also needs something to view the scene: a camera.
+]
+---
+.left-column[
+  # three.js
+  # Core
+]
+.right-column[
+  ## Camera
+  To complete the 3D-experience, the renderer also needs something to view the scene: a camera.
+]
+.right-column[
+  The camera determines how the 3D-scene gets projected to the 2D screen.
+]
+
+---
+.left-column[
+  # three.js
+  # Core
+]
+.right-column[
+  ## Camera
+  To complete the 3D-experience, the renderer also needs something to view the scene: a camera.
+]
+.right-column[
+  The camera determines how the 3D-scene gets projected to the 2D screen.
+]
+.right-column[
+  There are different camera models that we can use with three.js, we will concentrate on the model called `PerspectiveCamera`
+]
+
+---
+.left-column[
+  # three.js
+  # Core
+]
+.right-column[
+  ## Camera
+  To complete the 3D-experience, the renderer also needs something to view the scene: a camera.
+]
+.right-column[
+  The camera determines how the 3D-scene gets projected to the 2D screen.
+]
+.right-column[
+  There are different camera models that we can use with three.js, we will concentrate on the model called `PerspectiveCamera`
+]
+.right-column[
+  ```js
+camera = new THREE.PerspectiveCamera(
+  fov,
+  aspectRatio,
+  near,
+  far
+)
+  ```
+]
+---
+.left-column[
+  # three.js
+  # Core
+]
+.right-column[
+  ## All ready to go
+  When we have these three things we can render any 3D world:
+]
+
+---
+.left-column[
+  # three.js
+  # Core
+]
+.right-column[
+  ## All ready to go
+  When we have these three things we can render any 3D world:
+]
+.right-column[
+  ```js
+renderer.render(scene, camera);
+  ```
+]
+---
+.left-column[
+  # three.js
+  # Core
+]
+.right-column[
+  ## All ready to go
+  When we have these three things we can render any 3D world:
+]
+.right-column[
+  ```js
+renderer.render(scene, camera);
+  ```
+]
+.right-column[
+  When we have this in place, the rest of the job becomes adding objects to the scene so that the renderer can render it to the screen.
+]
+
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+]
+.right-column[
+  ## Commonalities
+
+  In three.js, all objects have some things in common
+
+  - Position
+  - Rotation
+  - Scale
+  - Children
+]
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+]
+.right-column[
+  ## Commonalities
+
+  In three.js, all objects have some things in common
+
+  - Position
+  - Rotation
+  - Scale
+  - Children
+]
+.right-column[
+  (... and some other things, which are more niche)
+]
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+]
+.right-column[
+  ## Special objects
+  In addition to special objects, like a scene, a camera, and lights, three.js has many generic objects
+]
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+]
+.right-column[
+  ## Special objects
+  In addition to special objects, like a scene, a camera, and lights, three.js has many generic objects
+]
+.right-column[
+  ## Generic objects
+  Generic objects can be made by combining a _geometry_ and a _material_.
+]
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+]
+.right-column[
+  ## Geometries
+  Geometries are three.js' way to represent form.
+]
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+]
+.right-column[
+  ## Geometries
+  Geometries are three.js' way to represent form.
+]
+.right-column[
+  Det finnes mange ulike geometrier innebygd:
+  There are many built-in geometries
+  - Box
+  - Circle
+  - Cone
+  - Plane
+  - Polyhedra
+  - etc
+]
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+]
+.right-column[
+  ## Geometries
+  Geometries are three.js' way to represent form.
+]
+.right-column[
+  Det finnes mange ulike geometrier innebygd:
+  There are many built-in geometries
+  - Box
+  - Circle
+  - Cone
+  - Plane
+  - Polyhedra
+  - etc
+]
+.right-column[
+  ```js
+geometry = new THREE.BoxGeometry(1, 1, 1);
+  ```
+]
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+]
+.right-column[
+  ## Geometries
+  Geometries are three.js' way to represent form.
+]
+.right-column[
+  Det finnes mange ulike geometrier innebygd:
+  There are many built-in geometries
+  - Box
+  - Circle
+  - Cone
+  - Plane
+  - Polyhedra
+  - etc
+]
+.right-column[
+```js
+geometry = new THREE.BoxGeometry(1, 1, 1);
+```
+]
+.right-column[
+  Most 3D-shapes have a corresponding geometry-function in three.js
+]
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+]
+.right-column[
+  ## Materials
+  Materials in three.js determines the way objects appear.
+]
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+]
+.right-column[
+  ## Materials
+  Materials in three.js determines the way objects appear.
+]
+.right-column[
+  Different materials have different attributes and interactions with other objects.
+]
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+]
+.right-column[
+  ## Materials
+  Materials in three.js determines the way objects appear.
+]
+.right-column[
+  Different materials have different attributes and interactions with other objects.
+]
+.right-column[
+  There are materials for special ligthing models or materials that run custom shaders.
+]
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+]
+.right-column[
+  ## Materials
+  Materials in three.js determines the way objects appear.
+]
+.right-column[
+  Different materials have different attributes and interactions with other objects.
+]
+.right-column[
+  There are materials for special ligthing models or materials that run custom shaders.
+]
+.right-column[
+  ```js
+material = new THREE.MeshBasicMaterial({color: 0xFF0000});
+  ```
+]
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+]
+.right-column[
+  ## Objects
+  When you have a _geometry_ and a _material_ you can construct an object.
+]
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+]
+.right-column[
+  ## Objects
+  When you have a _geometry_ and a _material_ you can construct an object.
+]
+.right-column[
+  There are also different object types. The most common one is the Mesh object:
+]
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+]
+.right-column[
+  ## Objects
+  When you have a _geometry_ and a _material_ you can construct an object.
+]
+.right-column[
+  There are also different object types. The most common one is the Mesh object:
+]
+.right-column[
+  ```js
+object = new THREE.Mesh(geometry, material);
+scene.add(object);
+  ```
+]
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+  # Extra
+]
+.right-column[
+  ## Extra stuff
+
+  three.js also contains some extra stuff.
+]
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+  # Extra
+]
+.right-column[
+  ## Extra stuff
+
+  three.js also contains some extra stuff.
+]
+.right-column[
+- lights
+- loaders
+- animation
+- math functions
+- etc...
+]
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+  # Extra
+  # Animation
+]
+.right-column[
+  ## Changing things
+
+  Only making static models can get boring.
+]
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+  # Extra
+  # Animation
+]
+.right-column[
+  ## Changing things
+
+  Only making static models can get boring.
+]
+.right-column[
+  Fortunatly, three.js has support for changing things.
+]
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+  # Extra
+  # Animation
+]
+.right-column[
+  ## Changing things
+
+  Only making static models can get boring.
+]
+.right-column[
+  Fortunatly, three.js has support for changing things.
+]
+.right-column[
+```js
+renderer.render(scene, camera);
+cube.position.x += 10;
+renderer.render(scene, camera);
+// the cube has moved 10 along the x-axis
+```
+]
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+  # Extra
+  # Animation
+]
+.right-column[
+  ## JavaScript animation
+
+  Because the objects in three.js exist in the JS-world, we can use well-known JS-techniques to animate things.
+]
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+  # Extra
+  # Animation
+]
+.right-column[
+  ## JavaScript animation
+
+  Because the objects in three.js exist in the JS-world, we can use well-known JS-techniques to animate things.
+]
+.right-column[
+```js
+function render() {
+  requestAnimationFrame(render);
+
+  // move stuff around
+
+  renderer.render(scene, camera);
+}
+```
+]
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+  # Extra
+  # Animation
+  # Boilerplate
+]
+.right-column[
+  ## Workshop materials
+
+  When you start programming, you will be given a small boilerplate to use as a starting point.
+]
+---
+.left-column[
+  # three.js
+  # Core
+  # Objects
+  # Extra
+  # Animation
+  # Boilerplate
+]
+.right-column[
+  ## Workshop materials
+
+  When you start programming, you will be given a small boilerplate to use as a starting point.
+]
+.right-column[
+  ```js
+// Load three.js
+const THREE = require("three");
+
+function init() {
+  // Here you can put code that only needs to run once
+}
+
+
+function render() {
+  // Queue a new call to render, making a loop
+  requestAnimationFrame(render);
+
+  // Here you can put the code that calculates the new "frame"
+  // Like box.position += 10
+  // and a call to renderer.render();
+}
+
+init();
+render();
+  ```
+]
+---
+# Time to code!
+
+You will find the task descriptions on [github.com/holgerl/3d-visualization-workshop](https://github.com/holgerl/3d-visualization-workshop)
+
+.full[
+![altxt](./img/download.png)
+]
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"> </script>
+    <script>var slideshow = remark.create();</script>
+  </body>
+</html>

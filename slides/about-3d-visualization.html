@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'}
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-slide-content { padding: 0.5rem 4rem; }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-slide-content * { font-size: 16px; }
+      .remark-code * { font-size: 12px; }
+      .remark-slide-content img { width: 50%; margin: 1rem 0;}
+
+      .remark-slide-content { text-align: center }
+
+      .topLeft { left: 1rem; top: 8rem }
+      .topRight { right: 1rem; top: 8rem }
+      .bottomLeft { left: 1rem; bottom: 1rem }
+      .bottomRight { right: 1rem; bottom: 1rem }
+
+      .left { left: 1rem; top: 16rem }
+      .center { right: 38%; top: 16rem }
+      .right { right: 1rem; top: 16rem }
+
+      .lowerleft { left: 1rem; top: 20rem }
+      .lowercenter { right: 38%; top: 20rem }
+      .lowerright { right: 1rem; top: 20rem }
+
+      .topLeft img,
+      .topRight img,
+      .bottomLeft img, 
+      .bottomRight img { width: 97.5% !important; margin: 0.1rem !important; }
+
+      .left7525 { left: 0rem; top: 20rem; position: fixed; width: 72% }
+      .right7525 { right: 1rem; top: 13rem; position: fixed; width: 25% }
+      .left7525 img { width: 85% !important; margin: 0.1rem !important; }
+      .right7525 img { width: 85% !important; margin: 0.1rem !important; }
+
+      .topLeft,
+      .topRight,
+      .bottomLeft, 
+      .bottomRight { position: fixed; width: 40%; }
+
+      .left,
+      .center,
+      .right,
+      .lowerleft,
+      .lowercenter,
+      .lowerright { position: fixed; width: 28%; }
+
+      .bigger * { width: 55%; }
+      .smaller * { width: 17%; }
+      .smaller .lowercenter { right: 25%; }
+      .smaller .lowerright { right: 2rem; }
+
+      .left img,
+      .center img,
+      .right img,
+      .lowerleft img,
+      .lowercenter img,
+      .lowerright img { width: 97.5% !important; margin: 0.1rem !important; }
+
+      .full * { width: 94% !important;}
+
+      .verticalCenter {
+        padding-top: 27%;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+<!--
+
+OUTLINE
+=========
+
+Hei! La oss starte.
+
+Jeg heter Holger, og dette er Stian og Petter. Vi er fra Bekk, og det vi skal gjøre nå er å holde kurs i 3D-visualisering. Og det skal gå over 3 dager. 
+
+Målet med det er at man skal forstå hvordan man lager 3D, og at man klarer å lage noe fett i 3D. Vi kommer til å starte rolig, og så blir det mer og mer spennende utover i serien.
+
+Plan:
+  Dag 1
+    Intro til 3D-visualisering
+    Intro til rammeverket three.js
+    Lage kule ting i 3D
+
+  Dag 2
+    Lage enda kulere ting
+
+  Dag 3
+    Være kreativ og lage særdeles kule ting
+
+Hva er 3D-visualisering?
+  Lage et flatt bilde på skjermen, av noe som egentlig ikke er flatt
+
+  (eksempler på webgl fra nettet, inkl bekk.no og Sprett)
+
+I prinsippet:
+  Starter med 3D-data: Koordinater (x, y, z), vektorer (x, y, z)
+  Ender opp med 2D-koordinater (pikselposisjoner) på skjermen, og hvilken farge de pikslene skal ha
+
+  (face-wireframe.png) + (shading1.png) + (pixels-on-screen-close.png)
+
+Viktige konsepter i 3D-visualisering
+
+  Vertex
+    Flertall: Vertices
+    Det er ytterpunktene på 3D-modellene. De er i koordinater i 3D-rommet. De lagres som lange lister av tre og tre floating point numbers (float)
+
+    (illustrasjon med grov polyhedron med indeks på hver vertex)
+    (opplisting av koordinatene til hver indeks)
+
+  Face
+    Det er en samling av tre vertices som tilsammen skal utgjøre et flatt polygon. De lagres som lister av tre og tre integers, som er indeksene til hver vertex i vertex-lista. 
+
+    (illustrasjon med polyhedron med index på hver face)
+    (opplisting av vertex-indeksene til hver face)
+
+  Geometry
+    Kalles også surface, mesh, model
+    Dette er en samling av en liste med vertices og en liste med faces som tilsammen skal bli en figur.
+
+    (ring rundt polyhedronet og ring rundt de to listene)
+
+  Material og shading
+    Dette definerer fargen til hver piksel som tilhører en face
+    Det gjøres som regel ved å lagre fargeverdier, refleksjonsstyrke, lysstyrke og så videre, og så la en kode regne ut fargen basert på det.
+
+    (shadertypes.png)
+
+  Kamera
+    Dette er "øyet som ser" i 3D-scenen. Det lagres som mange koordinater og vektorer som f.eks. 
+      posisjon i rommet
+      retning man ser
+      høyde og bredde på utsnittet man ser
+      hvor stor field-of-view man ser (fish eye vs kikkert)
+
+    (illustrasjon med animert three-camera-helper)
+
+  Lys
+    Disse brukes i utregningene for å finne fargene til pikslene. Lagres som f.eks.
+      posisjon
+      lysretning
+      lysstyrke og -farge
+
+    (illustrasjon med animert three-light-helper med point light og directional light)
+
+  Scene graph
+    Hierarki av objekter som tilsammen er innholdet i 3D-scenen. Lagres som en trestruktur av alle meshes, lights og andre ting som har en plassering i rommet. Gjør det veldig praktisk å flytte rundt eller rotere flere deler som hører sammen.
+
+    (illustrasjon av trestruktur av scene -> mann + light -> hode + arm + ben)
+
+  Rendering
+    Hele prosessen å lage 2D-bildet av 3D-scenen og vise det på skjermen. Må typisk gjøres 60 ganger i sekundet for å få helt jevn bevegelse. Mellom hver rendering kan man bevege på objektene og endre parametre for å animere, slik som stop motion.
+
+    Består av to viktige steg:
+      Projisering
+        Beregn 2D-posisjonen til alle vertices på skjermen
+      Rasterisering
+        Fargelegg pikslene til hver face på skjermen
+
+    (projection1.png) + (projection4.png) + (rasterization4.png)
+
+  Hardware
+    I motsetning til hverdagslig programmering i Java og JavaScript må vi i større grad forholde oss til hvordan hardwaren er bygd opp. Spesielt for å oppnå god ytelse.
+
+    - Tar forholdvis lang tid å sende data til GPU (60 fps)
+    - GPU har MASSIV parallellitet gjennom tusenvis av kjerner
+
+    (hardware.png)
+    (cpu-vs-gpu.png)
+
+-->
+
+3D visualization Workshop
+=======================
+
+●●●
+
+### Holger Ludvigsen
+_Bekk Consulting AS_
+
+### Stian Veum Møllersen
+_NRK_
+
+---
+
+Our goals
+========
+
+Gain understanding of how 3D is made
+
+Make something cool in 3D
+
+The plan for the day
+===================
+
+#### ● Part 1 ●
+
+Introduction to 3D visualization
+
+Introduction to the `three.js` framework
+
+Make cool stuff in 3D
+
+#### ● Break ●
+
+#### ● Part 2 ●
+
+Introduction to advanced 3D with shader programming
+
+Make _really_ cool stuff
+
+---
+
+What is 3D visualization?
+========================
+
+_Make a flat image on the screen,_
+
+_of something that is not flat_
+
+### Examples
+
+[World Flights](http://www.senchalabs.org/philogl/PhiloGL/examples/worldFlights/)
+
+[Sprett](http://playsprett.com)
+
+[Bekk.no](http://bekk.no)
+
+---
+
+3D visualization - The process in short
+==============================
+
+You begin with some 3D data: coordinates, vectors, and so on
+
+You end up with colored pixels on the screen
+
+.lowerleft[![altxt](./img/face-wireframe.png)]
+.lowercenter[![altxt](./img/shading1.png)]
+.lowerright[![altxt](./img/pixels-on-screen-close.jpg)]
+
+---
+
+.verticalCenter[
+### Let us understand this through
+
+# Some important concepts
+]
+
+---
+
+Vertex
+======
+
+A Vertex is a point on the surface of the 3D models
+
+Plural: _Vertices_
+
+They are coordinates in 3D space
+
+```c
+0: [0.12,  2.15,  1.01]
+1: [0.13,  0.25,  3.51]
+2: [1.42,  8.65,  0.06]
+3: [0.80,  2.15,  1.40]
+4: [0.00,  3.85,  4.01]
+5: [0.82,  1.15,  0.30]
+```
+
+![altxt](./img/vertices.gif)
+
+---
+
+Face
+====
+
+A face is a collection of 3 vertices
+
+They make up a flat triangle
+
+```c
+0: [0, 1, 2]
+1: [0, 3, 4]
+2: [3, 0, 1]
+3: [4, 5, 0]
+4: [3, 1, 2]
+5: [3, 4, 5]
+6: [4, 0, 2]
+7: [1, 3, 0]
+```
+
+![altxt](./img/faces.gif)
+
+---
+
+Geometry
+========
+
+A geometry is made up of a list of vertices and a list of faces
+
+Beware: It is known under many names in the literature! _Surface, mesh, model_
+
+It represents a complete 3D shape
+
+![altxt](./img/geometry.png)
+
+---
+
+Material and shading
+===================
+
+The material and shading defines the color of each pixel in a face
+
+```c
+color: [1.0, 0.5, 0.1]
+reflection: 0.75
+glossiness: 0.1
+translucency: 0.3
+texture: light-skin.png
+```
+
+![altxt](./img/material.gif)
+
+---
+
+Camera
+======
+
+The camera is the _"eye that sees"_ in the 3D scene
+
+In a way it represents the viewport into the scene
+
+```c
+position: [5.0, 1.5, -5.0]
+direction: [-1.0, -0.5, 1.0]
+width: 1920
+height: 1080
+field-of-view: 45
+```
+
+![altxt](./img/camera.gif)
+
+---
+
+Light
+====
+
+Lights are used together with the material to calculate the exact pixel colors
+
+_Strong light -> Brighter color_
+
+_Light pointing straight at the face_ -> _Brighter color_
+
+_Light is red_ -> _Increase red in color_
+
+```c
+position: [10.0, 2.0, -4.0]
+direction: [1.0, -0.3, 1.0]
+intensity: 2.5
+color: [1.0, 1.0, 1.0]
+```
+
+![altxt](./img/light.gif)
+
+---
+
+Scene graph
+===========
+
+A scene graph is a hierarchy of all the scene contents
+
+It is a tree structure with everything that is positioned somewhere in 3D space
+
+This is very useful for manipulating and transforming things
+
+![altxt](./img/scene-graph.png)
+
+---
+
+Rendering
+=========
+
+Rendering is the process of making a 2D image <br/>of the 3D scene and showing it on screen
+
+This is typically done 60 times per second
+
+Between each rendering, you can change <br/>a little bit of the scene to animate it (think stop motion)
+
+![altxt](./img/rendering.gif)
+
+---
+
+More on rendering
+================
+
+Rendering consists of two steps:
+
+**1: Projection:** Calculate the 2D position on screen for all vertices
+
+**2: Rasterization:** Color each pixel on each face
+
+.bigger[.lowerleft[![altxt](./img/projection1.png)]]
+.smaller[.lowercenter[![altxt](./img/projection4.png)]]
+.smaller[.lowerright[![altxt](./img/rasterization4.png)]]
+
+---
+
+Hardware
+========
+
+In contrast to our usual day job programming, <br/>we now have to really consider how the computer hardware works.
+
+#### Especially for gaining _performance_
+
+It is slow to pass data to the GPU (60 fps)
+
+The GPU is massively parallel
+
+.left7525[![altxt](./img/hardware.png)]
+.right7525[![altxt](./img/cpu-vs-gpu-vertical.png)]
+
+    </textarea>
+    <script src="lib/remark.min.js"> </script>
+    <script>var slideshow = remark.create();</script>
+  </body>
+</html>
+

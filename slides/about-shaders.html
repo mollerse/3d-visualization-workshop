@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shaderprogrammering</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'}
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-slide-content { padding: 0.5rem 4rem; }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-slide-content * { font-size: 16px; }
+      .remark-code * { font-size: 20px; }
+      .remark-slide-content img { width: 100%; margin: 1rem 0;}
+
+      .remark-slide-content { text-align: center }
+
+      .topLeft { left: 1rem; top: 8rem }
+      .topRight { right: 1rem; top: 8rem }
+      .bottomLeft { left: 1rem; bottom: 1rem }
+      .bottomRight { right: 1rem; bottom: 1rem }
+
+      .left { left: 1rem; top: 16rem }
+      .center { right: 38%; top: 16rem }
+      .right { right: 1rem; top: 16rem }
+
+      .lowerleft { left: 1rem; top: 20rem }
+      .lowercenter { right: 38%; top: 20rem }
+      .lowerright { right: 1rem; top: 20rem }
+
+      .topLeft img,
+      .topRight img,
+      .bottomLeft img,
+      .bottomRight img { width: 97.5% !important; margin: 0.1rem !important; }
+
+      .left7525 { left: 0rem; top: 20rem; position: fixed; width: 72% }
+      .right7525 { right: 1rem; top: 13rem; position: fixed; width: 25% }
+      .left7525 img { width: 85% !important; margin: 0.1rem !important; }
+      .right7525 img { width: 85% !important; margin: 0.1rem !important; }
+
+      .topLeft,
+      .topRight,
+      .bottomLeft,
+      .bottomRight { position: fixed; width: 40%;}
+
+      .left,
+      .center,
+      .right,
+      .lowerleft,
+      .lowercenter,
+      .lowerright { position: fixed; width: 28%;}
+
+      .left img,
+      .center img,
+      .right img,
+      .lowerleft img,
+      .lowercenter img,
+      .lowerright img { width: 97.5% !important; margin: 0.1rem !important; }
+
+      .full * { width: 94% !important;}
+
+      .verticalCenter {
+        padding-top: 27%;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 20%;
+        height: 92%;
+        float: left;
+        text-align: left;
+      }
+
+      .left-column h1:last-of-type, .left-column h2:last-of-type, .left-column h3:last-child {
+        color: #000;
+      }
+
+      .right-column {
+        width: 75%;
+        float: right;
+        padding-top: 1em;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: middle
+
+# Shaders
+
+_Shady_
+
+
+---
+.left-column[
+  ## Shaders?
+]
+.right-column[
+  ### Programs on the GPU
+
+  Shares are programs that run on the GPU, and makes use of the extreme parallelity it has.
+]
+---
+.left-column[
+  ## Shaders?
+]
+.right-column[
+  ### Programs on the GPU
+
+  Shares are programs that run on the GPU, and makes use of the extreme parallelity it has.
+]
+.right-column[
+  They are a central part of working with 3D and advanced graphics, since many operations are only possible because of we can do them in parallel.
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+]
+.right-column[
+  ### GLSL
+  We program shaders in their own language called GL Shading Language.
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+]
+.right-column[
+  ### GLSL
+  We program shaders in their own language called GL Shading Language.
+]
+.right-column[
+  ~~~glsl
+// Examples of declarations
+float a = 42.0;
+int c = 42;
+bool d = true;
+
+// This is a 3D vector. vec2 and vec4 also exist.
+vec3 myVector = vec3(2.0, 1.5, 0.5);
+// Read a component of the vector
+float component = myVector.x;
+// Read multiple components from a vector
+vec2 xyVector = myVector.xy;
+// Construct a new vector based on another vector
+vec3 color = vec3(xyVeCtor, 1.0);
+
+// Create a procedure that can be called
+float myProcedure(float t) {
+  t = t - 1;
+  return t*t*t + 1.0;
+}
+
+float myVerdi = myProcedure(2.3);
+  ~~~
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+]
+.right-column[
+  ### GLSL
+]
+.right-column[
+  ~~~glsl
+float e = (1.0 + 2.0) / 23.0;
+
+// Vector times scalar (x * 3.0, y * 3.0, z * 3.0)
+vec3 extendedVector = myVector * 3.0;
+// Vector pluss scalar (x + 3.0, y + 3.0, z + 3.0)
+vec3 longerVector = myVector + 3.0;
+// Dot product
+vec3 dot = myVector * otherVector;
+
+// Built-in math functions
+float f = sin(0.5);
+float g = pow(2.0, 8.0); // 2^8
+
+void main() {
+  // This is the entrypoint of a shader
+}
+  ~~~
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+]
+.right-column[
+  ### GLSL
+
+  Most things in GLSL are the way they are to make sure the GPU preforms optimally.
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+]
+.right-column[
+  ### GLSL
+
+  Most things in GLSL are the way they are to make sure the GPU preforms optimally.
+]
+.right-column[
+  Strict typing makes sure the GPU use the correct instructions.
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+]
+.right-column[
+  ### GLSL
+
+  Most things in GLSL are the way they are to make sure the GPU preforms optimally.
+]
+.right-column[
+  Strict typing makes sure the GPU use the correct instructions.
+]
+.right-column[
+  Optimized for vector and matrix operations.
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+]
+.right-column[
+  ### GLSL
+
+  Most things in GLSL are the way they are to make sure the GPU preforms optimally.
+]
+.right-column[
+  Strict typing makes sure the GPU use the correct instructions.
+]
+.right-column[
+  Optimized for vector and matrix operations.
+]
+.right-column[
+  Input and output is limited due to a need to control the flow of data into the GPU.
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+]
+.right-column[
+  ### Different shaders
+
+  In WebGL we have two kinds of shaders, for two different purpoes.
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+]
+.right-column[
+  ### Different shaders
+
+  In WebGL we have two kinds of shaders, for two different purpoes.
+]
+.right-column[
+  ![shader pipeline](img/shader-pipeline.png)
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+]
+.right-column[
+  ### Shaders in Three.js
+
+  To use a shader in three.js we use a special kind of material:
+
+
+  ~~~javascript
+let material = new THREE.ShaderMaterial({
+  vertexShader: "vertexShaderCode",
+  fragmentShader: "fragmentShaderCode",
+});
+  ~~~
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+]
+.right-column[
+  ### Shaders in Three.js
+
+  To use a shader in three.js we use a special kind of material:
+
+
+  ~~~javascript
+let material = new THREE.ShaderMaterial({
+  vertexShader: "vertexShaderCode",
+  fragmentShader: "fragmentShaderCode",
+});
+  ~~~
+]
+.right-column[
+  In addition to the code you write, three.js will add some helpful stuff
+  ~~~glsl
+uniform mat4 modelMatrix;
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+uniform mat4 viewMatrix;
+uniform mat3 normalMatrix;
+uniform vec3 cameraPosition;
+
+attribute vec3 position;
+attribute vec3 normal;
+attribute vec2 uv;
+  ~~~
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+  ## Vertex shader
+]
+.right-column[
+  ### Vertex shader
+
+  The vertex shader is responsible for calculating the final position to a vertex in a geometry.
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+  ## Vertex shader
+]
+.right-column[
+  ### Vertex shader
+
+  The vertex shader is responsible for calculating the final position to a vertex in a geometry.
+]
+.right-column[
+  ~~~glsl
+void main() {
+  gl_Position = position;
+}
+  ~~~
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+  ## Vertex shader
+]
+.right-column[
+  ### Vertex shader
+
+  The vertex shader is responsible for calculating the final position to a vertex in a geometry.
+]
+.right-column[
+  ~~~glsl
+void main() {
+  vec4 modelSpaceCoordinates = vec4(position.xyz, 1.0);
+
+  vec4 worldSpaceCoordinates =
+    modelViewMatrix * modelSpaceCoordinates;
+
+  vec4 screenSpaceCoordinate =
+    projectionMatrix * worldSpaceCoordinates;
+
+  gl_Position = screenSpaceCoordinate;
+}
+  ~~~
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+  ## Vertex shader
+  ## Fragment shader
+]
+.right-column[
+  ### Fragment shader
+
+  The fragment shader is responsible for coloring every pixel in the geometry.
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+  ## Vertex shader
+  ## Fragment shader
+]
+.right-column[
+  ### Fragment shader
+
+  The fragment shader is responsible for coloring every pixel in the geometry.
+]
+.right-column[
+  ~~~glsl
+void main() {
+  gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+}
+  ~~~
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+  ## Vertex shader
+  ## Fragment shader
+]
+.right-column[
+  ### Fragment shader
+
+  The fragment shader is responsible for coloring every pixel in the geometry.
+]
+.right-column[
+  ~~~glsl
+void main() {
+  vec3 color = vec3(1.0, 0.0, 0.0);
+  float alpha = 1.0;
+
+  gl_FragColor = vec4(color, alpha);
+}
+  ~~~
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+  ## Vertex shader
+  ## Fragment shader
+  ## Arguments
+]
+.right-column[
+  ### Passing data to the shaders
+
+  We will often need to pass data from the JavaScript-world to the GLSL-world, or between the Vertex and Fragment shader.
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+  ## Vertex shader
+  ## Fragment shader
+  ## Arguments
+]
+.right-column[
+  ### Passing data to the shaders
+
+  We will often need to pass data from the JavaScript-world to the GLSL-world, or between the Vertex and Fragment shader.
+]
+.right-column[
+  To achieve this we have three different techniques: **Uniforms**, **Attributes** og **Varying**.
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+  ## Vertex shader
+  ## Fragment shader
+  ## Arguments
+]
+.right-column[
+  ### Uniforms
+
+  Read only values, which are identical across vertices and pixels in both shaders. Typically things like time, mouse position and animation speed.
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+  ## Vertex shader
+  ## Fragment shader
+  ## Arguments
+]
+.right-column[
+  ### Uniforms
+
+  Read only values, which are identical across vertices and pixels in both shaders. Typically things like time, mouse position and animation speed.
+]
+.right-column[
+In a shader:
+  ~~~glsl
+uniform float time;
+  ~~~
+Assigned in JavaScript:
+  ~~~javascript
+let material = new THREE.ShaderMaterial({
+  vertexShader: vertexShaderCode,
+  fragmentShader: fragmentShaderCode,
+  uniforms: { time: { value: 1.0 } }
+});
+  ~~~
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+  ## Vertex shader
+  ## Fragment shader
+  ## Arguments
+]
+.right-column[
+  ### Attributes
+
+  Read only values which are assigned per vertex in a geometry. Typically things like color, normals, and texture coordinates. Can only be read in a vertex shader.
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+  ## Vertex shader
+  ## Fragment shader
+  ## Arguments
+]
+.right-column[
+  ### Attributes
+
+  Read only values which are assigned per vertex in a geometry. Typically things like color, normals, and texture coordinates. Can only be read in a vertex shader.
+]
+.right-column[
+In a vertex shader:
+  ~~~glsl
+attribute float offset;
+  ~~~
+Assigned in JavaScript:
+  ~~~javascript
+let geometry = new THREE.BoxBufferGeometry(1,1,1);
+geometry.addAttribute(
+  "offset",
+  new THREE.BufferAttribute([offset data], 1)
+);
+  ~~~
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+  ## Vertex shader
+  ## Fragment shader
+  ## Arguments
+]
+.right-column[
+  ### Varying
+
+  Values which are passed _from_ a vertex shader _to_ a fragment shader. Not possible to set directly in JavaScript. Produces one value per vertex, since we are assigning it in the vertex shader. Used for things like color, normals, and other things which are derived from a vertex.
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+  ## Vertex shader
+  ## Fragment shader
+  ## Arguments
+]
+.right-column[
+  ### Varying
+
+  Values which are passed _from_ a vertex shader _to_ a fragment shader. Not possible to set directly in JavaScript. Produces one value per vertex, since we are assigning it in the vertex shader. Used for things like color, normals, and other things which are derived from a vertex.
+]
+.right-column[
+In a vertex shader:
+  ~~~glsl
+varying vec3 vertexColor;
+
+void main() {
+  vertexColor = vec3(1.0, 0.0, 0.0);
+
+  // other code
+}
+  ~~~
+In a fragment shader:
+  ~~~glsl
+varying vec3 vertexColor;
+
+void main() {
+  // You can use the value of vertexColor here
+}
+  ~~~
+]
+---
+.left-column[
+  ## Shaders?
+  ## GLSL
+  ## Vertex shader
+  ## Fragment shader
+  ## Arguments
+]
+.right-column[
+  ### Varying
+
+  Values which are passed _from_ a vertex shader _to_ a fragment shader. Not possible to set directly in JavaScript. Produces one value per vertex, since we are assigning it in the vertex shader. Used for things like color, normals, and other things which are derived from a vertex.
+]
+.right-column[
+  ![varying interpolate](img/varying.gif)
+]
+---
+# Back to the code!
+
+You will find the task descriptions on [github.com/holgerl/3d-visualization-workshop](https://github.com/holgerl/3d-visualization-workshop)
+
+.full[
+![altxt](./img/download.png)
+]
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"> </script>
+    <script>var slideshow = remark.create();</script>
+  </body>
+</html>
