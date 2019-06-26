@@ -5,7 +5,7 @@
   "scripts": {
     "start": "budo src/index.js --dir src --live -- -t brfs",
     "elective:flightsimulator": "budo electives/flightsimulator/index.js --dir src --dir ./electives --live -- -t brfs",
-    "elective:fragment-shader": "budo electives/fragment-shader/index.js --dir src --dir ./ --live -- -t brfs",
+    "elective:space": "budo electives/space/index.js --dir src --dir ./ --live -- -t brfs",
     "elective:orthographic-car": "budo electives/orthographic-car/index.js --dir src --live -- -t brfs",
     "elective:particle-system": "budo electives/particle-system/index.js --dir src --live -- -t brfs",
     "elective:perlin-noise": "budo electives/perlin-noise/index.js --dir src --live -- -t brfs -t glslify",
@@ -15,7 +15,7 @@
     "solution:3": "budo solutions/task3/index.js --dir src --live -- -t brfs",
     "solution:4": "budo solutions/task4/index.js --dir src --live -- -t brfs",
     "solution:flightsimulator": "budo electives/solutions/flightsimulator/index.js --dir src --dir ./electives --live -- -t brfs",
-    "solution:fragment-shader": "budo electives/solutions/fragment-shader/index.js --dir src --dir ./ --live -- -t brfs",
+    "solution:space": "budo electives/solutions/space/index.js --dir src --dir ./ --live -- -t brfs",
     "solution:orthographic-car": "budo electives/solutions/orthographic-car/index.js --dir src --live -- -t brfs",
     "solution:particle-system": "budo electives/solutions/particle-system/index.js --dir src --live -- -t brfs",
     "solution:perlin-noise": "budo electives/solutions/perlin-noise/index.js --dir src --live -- -t brfs -t glslify",

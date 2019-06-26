@@ -1,4 +1,4 @@
-## Fragment Shader
+## Interaktiv stjerne
 
 > Interaktiv stjerne
 
