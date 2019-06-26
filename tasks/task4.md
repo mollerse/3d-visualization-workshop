@@ -155,4 +155,4 @@ This wraps up the workshop, but if you have time to spare here are some suggesti
 
 ## Dat.gui control panel elective
 
-Now that you have reached 3D nirvana. We encourage you to try the english elective [Add dat.gui](https://github.com/holgerl/3d-visualization-workshop/tree/master/tasks/bonus-task.md) to have easy access to parameter tweaking.
+Now that you have reached 3D nirvana. We encourage you to try the english elective [Add dat.gui](https://github.com/mollerse/3d-visualization-workshop/tree/master/tasks/bonus-task.md) to have easy access to parameter tweaking.

@@ -8,13 +8,13 @@ In this part we familiarize ourselves with the three.js API by creating some sim
 
 Intro material:
 
-- [About 3d visualization](https://holgerl.github.io/3d-visualization-workshop/slides/about-3d-visualization.html)
-- [About three.js](https://holgerl.github.io/3d-visualization-workshop/slides/about-threejs.html)
+- [About 3d visualization](https://mollerse.github.io/3d-visualization-workshop/slides/about-3d-visualization.html)
+- [About three.js](https://mollerse.github.io/3d-visualization-workshop/slides/about-threejs.html)
 
 Tasks:
 
-- [Task 1 - Hello cube world!](https://github.com/holgerl/3d-visualization-workshop/tree/master/tasks/task1.md)
-- [Task 2 - Animation and sensory input](https://github.com/holgerl/3d-visualization-workshop/tree/master/tasks/task2.md)
+- [Task 1 - Hello cube world!](https://github.com/mollerse/3d-visualization-workshop/tree/master/tasks/task1.md)
+- [Task 2 - Animation and sensory input](https://github.com/mollerse/3d-visualization-workshop/tree/master/tasks/task2.md)
 
 
 ## Part 2:
@@ -23,12 +23,12 @@ In this part we will look at shaders, what their role are and what they can do. 
 
 Intro material:
 
-- [About shaders](https://holgerl.github.io/3d-visualization-workshop/slides/about-shaders.html)
+- [About shaders](https://mollerse.github.io/3d-visualization-workshop/slides/about-shaders.html)
 
 Tasks:
 
-- [Task 3 - Fragment shaders](https://github.com/holgerl/3d-visualization-workshop/tree/master/tasks/task3.md)
-- [Task 4 - Vertex shaders](https://github.com/holgerl/3d-visualization-workshop/tree/master/tasks/task4.md)
+- [Task 3 - Fragment shaders](https://github.com/mollerse/3d-visualization-workshop/tree/master/tasks/task3.md)
+- [Task 4 - Vertex shaders](https://github.com/mollerse/3d-visualization-workshop/tree/master/tasks/task4.md)
 
 ## Electives
 
